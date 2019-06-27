@@ -1,0 +1,15 @@
+    {%extends 'blog/base_blog.html'%}
+
+
+
+    {% block title %}
+        Posts list
+    {% endblock %}
+
+    {% block content %}
+        {% for name in names%}
+        <p>
+            {{ name }}
+        </p>
+        {% endfor %}
+    {% endblock %}
