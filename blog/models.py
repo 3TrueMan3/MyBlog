@@ -30,6 +30,9 @@ class Post(models.Model):
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['-date_pub']
+
     def __str__(self):
         return self.title
 
@@ -49,3 +52,6 @@ class Tag(models.Model):
 
     def get_delete_url(self):
         return reverse('tag_delete_url', kwargs={'slug': self.slug})
+
+    class Meta:
+        ordering = ['title']
