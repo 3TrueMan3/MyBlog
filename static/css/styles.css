@@ -21,3 +21,8 @@
 a.edit, a.delete {
     display: none;
 }
+
+.login-form {
+    width: 40%;
+    margin: 50px auto;
+}

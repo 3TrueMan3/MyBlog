@@ -1,13 +1,11 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import get_object_or_404
 from django.views.generic import View
-from django.urls import reverse
-from .models import Post, Tag
 from .utils import *
 from .forms import TagForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib import auth
+from django.http import HttpResponseRedirect
 
 class PostDetail(ObjectDetailMixin, View):
     model = Post
@@ -58,6 +56,17 @@ class TagDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     template = 'blog/tag_delete_form.html'
     redirect_url = 'tags_list_url'
     raise_exception = True
+
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('posts_list_url')
+    else:
+        return HttpResponseRedirect('blog/registration/login.html')
 
 
 def posts_list(request):
