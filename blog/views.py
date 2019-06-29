@@ -7,6 +7,7 @@ from .utils import *
 from .forms import TagForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 class PostDetail(ObjectDetailMixin, View):
     model = Post
@@ -60,8 +61,14 @@ class TagDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
 
 
 def posts_list(request):
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
+    else:
+        posts = Post.objects.all()
+
     posts_per_page = 5
-    posts = Post.objects.all()
     paginator = Paginator(posts, posts_per_page)
 
     page_number = request.GET.get('page', 1)
