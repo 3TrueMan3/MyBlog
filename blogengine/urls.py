@@ -22,6 +22,6 @@ urlpatterns = [
     path('', redirect_blog),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    path(r'accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls'))
 
 ]

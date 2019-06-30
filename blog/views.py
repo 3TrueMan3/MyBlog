@@ -108,6 +108,7 @@ def tags_list(request):
     return render(request, 'blog/tags_list.html', context={'tags': tags})
 
 
+# TODO Реализовать авторизацию пользователя
 
 
 

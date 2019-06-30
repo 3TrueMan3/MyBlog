@@ -31,6 +31,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
+        db_table = 'post'
         ordering = ['-date_pub']
 
     def __str__(self):
@@ -55,3 +56,10 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['title']
+
+# class Comments(models.Model):
+#     class Meta:
+#         db_table = 'comments'
+#
+#     comments_text = models.TextField
+#     comments_post = models.ForeignKey(Post)
