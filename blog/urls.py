@@ -4,6 +4,7 @@ from .views import *
 urlpatterns = [
     path('', posts_list, name='posts_list_url'),
     path('accounts/login/', login, name='login_url'),
+    path('accounts/logout/', logout, name='logout_url'),
     path('post/create/', PostCreate.as_view(), name='post_create_url'),
     path('post/<str:slug>/', PostDetail.as_view(), name='post_detail_url'),
     path('post/<str:slug>/update/', PostUpdate.as_view(), name='post_update_url'),

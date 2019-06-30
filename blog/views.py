@@ -69,6 +69,11 @@ def login(request):
         return HttpResponseRedirect('blog/registration/login.html')
 
 
+def logout(request):
+    logout(request)
+    return redirect('blog/registration/logout.html')
+
+
 def posts_list(request):
     search_query = request.GET.get('search', '')
 
@@ -108,7 +113,7 @@ def tags_list(request):
     return render(request, 'blog/tags_list.html', context={'tags': tags})
 
 
-# TODO Реализовать авторизацию пользователя
+
 
 
 
