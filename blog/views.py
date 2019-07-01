@@ -70,11 +70,15 @@ def login(request):
 
 
 def logout(request):
-    logout(request)
-    return redirect('blog/registration/logout.html')
+    auth.logout(request)
+    return render(request, 'blog/registration/logout.html')
 
 
 def posts_list(request):
+
+    """
+    Поиск по постам и тегам
+    """
     search_query = request.GET.get('search', '')
 
     if search_query:
@@ -82,6 +86,9 @@ def posts_list(request):
     else:
         posts = Post.objects.all()
 
+    """
+    Пагинация
+    """
     posts_per_page = 5
     paginator = Paginator(posts, posts_per_page)
 
